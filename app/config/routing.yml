@@ -1,0 +1,14 @@
+pticoin:
+    resource: "@PticoinBundle/Controller/"
+    type:     annotation
+
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+
+navigation:
+    resource: "@NavigationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+

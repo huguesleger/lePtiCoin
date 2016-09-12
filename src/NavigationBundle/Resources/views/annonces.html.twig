@@ -1,0 +1,23 @@
+{% extends "::template.html.twig"%}
+{% block header %}Annonces{% endblock %}
+
+{% block body %}
+    <div class="container col-xs-10 col-xs-offset-1">
+
+            {% for annonce in annonces%}
+                <article class="bg-warning">
+                    <header class="col-xs-12 text-center text-bold text-uppercase"><h3>{{annonce.categorie.nom}}</h3></header>
+                    <h4 class="col-xs-8">{{annonce.titre}}</h4>
+                    <h6 class="col-xs-4">{{annonce.dateDeParution|date("d/m/y")}}</h6>
+                    <img class="col-xs-8" src="null" alt="{{annonce.image}}" />
+                    <p class="col-xs-4 text-justify">{{annonce.description|raw('html')}}</p>
+                    <a class="col-xs-12 text-right" href="{{path("more",{"id":annonce.id})}}">en savoir plus ...</a>
+                    <a class="col-xs-12 text-right" href="{{path("editAnnonce",{"id":annonce.id})}}">Editer</a>
+                    <p class="col-xs-12 end"></p>
+                </article>
+            {% endfor %} 
+
+
+            
+    </div>
+{% endblock %}

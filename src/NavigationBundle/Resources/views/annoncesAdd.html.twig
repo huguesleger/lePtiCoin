@@ -1,0 +1,14 @@
+{% extends "::template.html.twig"%}
+{% block header %}Annonces - ajout{% endblock %}
+
+{% block body %}
+    <div class="container col-xs-10 col-xs-offset-1">
+
+            {{form_start(annonce,{'attr':{'action':path('addAnn')}})}}
+            {{form_rest(annonce)}}
+            <input type="submit" value="Ajouter" />
+            {{form_end(annonce)}}
+            
+
+    </div>
+{% endblock %}

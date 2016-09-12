@@ -1,0 +1,31 @@
+{% extends "::template.html.twig"%}
+{% block header %}Categories{% endblock %}
+
+{% block body %}
+    <div class="container col-xs-10 col-xs-offset-1">
+        {{form_start(formulaire,{'attr':{'action':path('addCat')}})}}
+        <select>
+            <option value="0"></option>
+            {% for cat in categories %}
+                <option value="{{cat.id}}">{{cat.nom}}</option>
+            {% endfor %}
+        </select>
+        <!--<input type="text" name="categorie"/>-->
+        {{form_widget(formulaire.nom,{'attr':{'name':'categorie'}})}}
+        <input type="submit" value="ok" />
+        </form>
+        <form action="{{path('removeCat')}}">
+            <input type="text" name="delCat"/>
+            <input type="submit" value="supprimer" />
+        </form>
+        {#{{form_end(formulaire)}}#}
+    </div>
+        
+    <p id="resutat" class="col-xs-10 col-xs-offset-1">hello</p>
+        <button id="lance" class="col-xs-10 col-xs-offset-1">Tester ajax</button>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/framework/js/events.js') }}"></script>
+{% endblock %}

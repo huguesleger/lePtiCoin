@@ -13,21 +13,40 @@
         <header class="col-xs-10 col-xs-offset-1 bg-danger">
             <h1 class="col-xs-4 col-xs-offset-1  text-uppercase text-bold"><a href="{{path("home")}}">le pti coin</a></h1>
             <h2 class="col-xs-3 col-xs-offset-3">{% block header %}Home{% endblock %}</h2>
+            <!--
+            ici si le mec enregistré a le role : ROLE_USER on lui affiche le lien de deconnexion
+            mais l'admin herite des privilèges du user... donc le comportement est le même pour un admin. ;)
+            -->
+            {% if is_granted("ROLE_USER") %}
+
+                <a href="{{path("loginOut")}}">se déconnecter</a>
+            {% else %}
+                <!--sinon on affiche le formulaire de connexion-->
+                <form action="{{path('loginCheck',{}) }}" method="post">
+                    <input type="text" id="nom" name="_username" placeholder="Nom d'utilisateur" value=""/>
+                    <input type="password" id="pass" name="_password" placeholder="Mot de passe" value=""/>
+                    <input type="submit" value="se connecter"/>
+                </form>
+            {% endif %}
         </header>
         <nav class="col-xs-10 col-xs-offset-1 nav">
             <ul class="navbar-default nav">
                 <li class="navbar-brand"><a href="{{path("annonces")}}">Consulter les annonces</a></li>
+                {% if is_granted("ROLE_USER") %}
                 <li class="navbar-brand"><a href="{{path("addAnnonce")}}">ajouter une annonce</a></li>
+                {% endif %}
+                {% if is_granted("ROLE_ADMIN") %}
                 <li class="navbar-brand"><a href="{{path("categories")}}">ajouter une categorie</a></li>
+                {% endif %}
                 <form class="col-xs-offset-6">
                     <input type="text" placeholder="Recherchez" />
                     <input type="submit" value="chercher" />
                 </form>
             </ul>
-                
+
         </nav>
         {% block body %}
-        
+
         {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('bundles/vendors/jquery/jquery.js') }}"></script>

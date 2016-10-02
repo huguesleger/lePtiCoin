@@ -9,6 +9,7 @@ use PticoinBundle\Form\CategorieType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /*
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Description of ViewController
+ * Un controller spécial pour les vue... ici on ne fait que renvoyer des vues au client
  *
  * @author Formateur BeWeb
  */
@@ -28,8 +30,9 @@ class ViewController extends Controller {
      * @Route("/",name="home")
      * @Template("NavigationBundle::index.html.twig")
      */
-    public function indexAction() {
+    public function indexAction(Request $r) {
         return null;
+        
     }
 
     /**
@@ -66,7 +69,7 @@ class ViewController extends Controller {
      * @Template("NavigationBundle::annoncesEdit.html.twig")
      */
     public function editAnnonce(Annonce $a){
-        return array("annonce" => $this->createForm(AnnonceType::class, $a)->createView());
+        return array("annonce" => $this->createForm(AnnonceType::class, $a)->createView(),"id"=>$a->getId());
     }
     
     /**
@@ -81,12 +84,6 @@ class ViewController extends Controller {
         );
     }
 
+     
     
-    /**
-     * @Route("test/ann")
-     */
-    public function testAnn(){
-        var_dump($this->getDoctrine()->getRepository("PticoinBundle:Annonce")->find(1));
-        return new Response("test");
-    }
 }

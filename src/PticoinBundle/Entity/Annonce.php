@@ -2,8 +2,11 @@
 
 namespace PticoinBundle\Entity;
 
+
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * Annonce
@@ -28,13 +31,14 @@ class Annonce
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
-
     /**
-     * @var string
+     * @var UploadedFile
      *
      * @ORM\Column(name="image", type="string", length=255)
+     * @File(mimeTypes={"image/jpeg","image/png"})
      */
     private $image;
+
 
     /**
      * @var string
@@ -153,7 +157,6 @@ class Annonce
      */
     public function setDescription($description)
     {
-//        $this->description = $description;
         $this->description = nl2br($description);
 
         return $this;

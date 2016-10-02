@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Serializer;
 
 /**
  * Description of AjaxController
- *
+ *Un petit controller spécial pour les requetes ajax (on sent le WebService qui arrive ;) 
  * @author Formateur BeWeb
  */
 class AjaxController extends Controller{
